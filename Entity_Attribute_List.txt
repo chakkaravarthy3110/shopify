@@ -1,0 +1,11 @@
+Entity Attribute List
+
+Customer(CustomerID PK, Name NOT NULL, Email UNIQUE NOT NULL, Phone UNIQUE, Address, Password NOT NULL, CreatedAt DEFAULT CURRENT_TIMESTAMP)
+Category(CategoryID PK, CategoryName UNIQUE NOT NULL)
+Product(ProductID PK, CategoryID FK, Name NOT NULL, Price CHECK(Price>0), Stock DEFAULT 0)
+Inventory(InventoryID PK, ProductID FK UNIQUE, Quantity CHECK(Quantity>=0))
+Order(OrderID PK, CustomerID FK, OrderDate DEFAULT CURRENT_TIMESTAMP, Status DEFAULT 'Pending')
+OrderItem(OrderItemID PK, OrderID FK, ProductID FK, Quantity CHECK(Quantity>0), UnitPrice CHECK(UnitPrice>0))
+Payment(PaymentID PK, OrderID FK UNIQUE, Method NOT NULL, Amount CHECK(Amount>=0), Status)
+Shipment(ShipmentID PK, OrderID FK UNIQUE, TrackingNo UNIQUE, Status)
+Review(ReviewID PK, CustomerID FK, ProductID FK, Rating CHECK(Rating BETWEEN 1 AND 5), Comment)
